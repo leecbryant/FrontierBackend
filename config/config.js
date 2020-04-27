@@ -4,7 +4,7 @@ var connection = mysql.createPool({
   host: "",
   user: "",
   password: "",
-  database: "",
+  database: "test",
   port: 3306
 });
 
