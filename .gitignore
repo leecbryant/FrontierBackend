@@ -1,3 +1,4 @@
 node_modules
 ./index.js
-config
+config/config.js
+config/jwt_config.js
