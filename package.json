@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "description": "Backend for FrontierPal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leecbryant/resBack.git"
+  },
+  "keywords": [],
+  "author": "Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leecbryant/resBack/issues"
+  },
+  "homepage": "https://github.com/leecbryant/resBack#readme",
+  "dependencies": {
+    "aws-sdk": "^2.624.0",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "forever": "^2.0.0",
+    "mysql": "^2.18.1",
+    "njwt": "^1.0.0"
+  },
+  "name": "frontier-backend",
+  "devDependencies": {}
+}
