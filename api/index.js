@@ -15,4 +15,38 @@ router.get('/horses', function (req, res) {
     });
 });
 
+// Horse Images Pull
+router.get('/horseimages', function (req, res) {
+    mysql.query("SELECT * FROM horses_images", function (err, halls) {
+    if (err) {
+        throw err;
+    } else {
+        res.status(200).send({"data": halls});
+    }
+    });
+});
+
+// Horse Treatment Pull
+router.get('/horsetreatments', function (req, res) {
+    mysql.query("SELECT * FROM horses_treatments", function (err, halls) {
+    if (err) {
+        throw err;
+    } else {
+        res.status(200).send({"data": halls});
+    }
+    });
+});
+
+
+// Horse Markings Pull
+router.get('/horsemarkings', function (req, res) {
+    mysql.query("SELECT * FROM horses_markings", function (err, halls) {
+    if (err) {
+        throw err;
+    } else {
+        res.status(200).send({"data": halls});
+    }
+    });
+});
+
 module.exports = router;
