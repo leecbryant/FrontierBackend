@@ -31,11 +31,11 @@ router.post('/register', function(req, res) {
 
 // Login 
 router.post('/login', function (req, res) {
-  mysql.query("SELECT id, Name, Username, Password, Hall, Access, Header, SideNav, RTL FROM users WHERE Username = '"+ req.body.name +"'", function (err, rows) {
+  mysql.query("SELECT id, FirstName, LastName, Email, Password, AccessLevel, Access FROM users WHERE Username = '"+ req.body.Username +"'", function (err, rows) {
     if (err) return res.status(500).send({status: 'Server error', err:err});
-    bcrypt.compare(req.body.pword, rows[0].Password, function(err, result) {
+    bcrypt.compare(req.body.Password, rows[0].Password, function(err, result) {
       if(result) {
-        var jwt = nJwt.create({"id": rows[0].id, "Name": rows[0].Name, "SessionHall": req.body.hall, "Hall": rows[0].Hall, "Access": rows[0].Access, "Header": rows[0].Header, "SideNav": rows[0].SideNav, "RTL": rows[0].RTL}, config.secret);
+        var jwt = nJwt.create({"id": rows[0].id, "FirstName": rows[0].FirstName, "LastName": req.body.LastName, "Email": rows[0].Email, "AccessLevel": rows[0].AccessLevel, "Access": rows[0].Access}, config.secret);
         jwt.setExpiration(new Date().getTime() + (8*60*60*1000));
         res.status(200).send({ auth: true, token: jwt.compact() });
       } else {
