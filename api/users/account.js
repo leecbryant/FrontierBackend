@@ -22,7 +22,7 @@ router.post('/register', function(req, res) {
               res.status(500).send({"success": false});
               throw err;
             } else {
-              res.status(200).send({"success": true});
+              res.status(200).send({"success": true});c
             }
           });
       });
