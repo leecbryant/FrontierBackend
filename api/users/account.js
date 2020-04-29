@@ -43,7 +43,9 @@ router.post('/login', function (req, res) {
           var jwt = nJwt.create({"id": rows[0].id, "FirstName": rows[0].FirstName, "LastName": req.body.LastName, "Email": rows[0].Email, "AccessLevel": rows[0].AccessLevel, "Access": rows[0].Access }, config.secret);
           jwt.setExpiration(new Date().getTime() + (8*60*60*1000));
           res.status(200).send({ auth: true, token: jwt.compact() });
-        } 
+        } else {
+          res.status(401).send({auth: false, token: null });
+        }
       });
     } else {
       res.status(401).send({auth: false, token: null });
