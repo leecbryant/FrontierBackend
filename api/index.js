@@ -129,4 +129,31 @@ router.post('/support', function (req, res) {
     });
 });
 
+router.post('/dart', function (req, res) {
+    mysql.query("INSERT INTO horses_treatments (HorseID, Date, Action) values ('"+req.body.HorseID+"', '"+formatDate(new Date())+"', '"+req.body.Shot+"')",
+        function (err, result) { 
+        if (err) {
+            res.status(500).send({"success": false, "id": null});
+            throw err;
+        } else {
+            res.status(200).send({"success": true, "id": result.insertId});
+        }
+    });
+});
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 module.exports = router;
