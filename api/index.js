@@ -52,6 +52,35 @@ router.post('/horses', function (req, res) {
     });
 });
 
+// Horse Data PUT
+router.put('/horses', function (req, res) {
+    mysql.query("UPDATE horses SET Name = '"+req.body.Name+"', herd = '"+req.body.Location+"', bands = '"+req.body.BandName+"', Status = '"+req.body.Status+"' WHERE ID = '"+req.body.HorseID+"'",
+    function (err, result) { 
+        if (err) {
+            res.status(500).send({"success": false});
+            throw err;
+        } else {
+            let Color = req.body.Features.Color === undefined ? '"Black"' : '"'+req.body.Features.Color+'"';
+            let ManePosition = req.body.Features.ManePosition === undefined || "" || null ? null : '"'+req.body.Features.ManePosition+'"';
+            let ManeColor = req.body.Features.Mane === undefined || "" || null ? null : '"'+req.body.Features.Mane+'"';
+            let leftFront = req.body.Features.leftFront === undefined || "" || null ? null : '"'+req.body.Features.leftFront+'"';
+            let rightFront = req.body.Features.rightFront === undefined || "" || null ? null : '"'+req.body.Features.rightFront+'"';
+            let leftBack = req.body.Features.leftBack === undefined || "" || null ? null : '"'+req.body.Features.leftBack+'"';
+            let rightBack = req.body.Features.rightBack === undefined || "" || null ? null : '"'+req.body.Features.rightBack+'"';
+            let Face = req.body.Features.Face === undefined || "" || null ? null : '"'+req.body.Features.Face+'"';
+            mysql.query("UPDATE horses_markings SET color = "+Color+", Position = "+ManePosition+", Mane_Color = "+ManeColor+", LFMarking = "+leftFront+",  RFMarking = "+rightFront+", LHMarking = "+leftBack+", RHMarking = "+rightBack+", FaceString = "+Face+" WHERE HorseID = '"+req.body.HorseID+"'",
+            function (error, respo) { 
+                if (error) {
+                    res.status(500).send({"success": false});
+                    throw error;
+                } else {
+                    res.status(200).send({"success": true});
+                }
+            });
+        }
+    });
+});
+
 
 // Horse Images Pull
 router.get('/horseimages', function (req, res) {
@@ -84,6 +113,19 @@ router.get('/horsemarkings', function (req, res) {
     } else {
         res.status(200).send({"data": rows});
     }
+    });
+});
+
+// Post
+router.post('/support', function (req, res) {
+    mysql.query("INSERT INTO support (Name, Email, Comments) values ('"+req.body.Name+"', '"+req.body.Email+"', '"+req.body.Comments+"')",
+        function (err, result) { 
+        if (err) {
+            res.status(500).send({"success": false});
+            throw err;
+        } else {
+            res.status(200).send({"success": true});
+        }
     });
 });
 
